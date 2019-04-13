@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'products.apps.ProductsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,12 +74,29 @@ WSGI_APPLICATION = 'slime.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+
+# USE THIS ONLY WHEN CONNECTING TO A SQLITE DB
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+# THIS IS TO CONNECT TO A POSTGRESQL DB. WAYNE PREFERS USING POSTGRE DB EVEN IN DEVELOPMENT ENVIRONMENT
+# SO CAN SHARE DBS BETWEEN HOME AND CLOUD
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'slimedb',
+        'USER': 'postgres',
+        'PASSWORD': 'locallocal',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
+
+
 
 
 # Password validation
@@ -118,3 +136,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
